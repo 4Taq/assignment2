@@ -92,7 +92,7 @@ public class EventController : Controller
 
         if (ModelState.IsValid)
         {
-            // Convert to UTC before saving
+            
             evnt.StartDate = DateTime.SpecifyKind(evnt.StartDate, DateTimeKind.Utc);
             evnt.EndDate   = DateTime.SpecifyKind(evnt.EndDate,   DateTimeKind.Utc);
 
@@ -145,8 +145,10 @@ public class EventController : Controller
         {
             return NotFound();
         }
-
-        // Validate date range
+        
+        evnt.StartDate =  DateTime.SpecifyKind(evnt.StartDate, DateTimeKind.Utc);
+        evnt.EndDate = DateTime.SpecifyKind(evnt.EndDate, DateTimeKind.Utc);
+        
         if (evnt.EndDate < evnt.StartDate)
         {
             ModelState.AddModelError("EndDate", "End date must be after start date.");
@@ -164,14 +166,12 @@ public class EventController : Controller
                 {
                     return NotFound();
                 }
-
-                // Check permissions
+                
                 if (existingEvent.OrganizerId != userId && !User.IsInRole("Admin"))
                 {
                     return Forbid();
                 }
-
-                // Preserve the original organizer
+                
                 evnt.OrganizerId = existingEvent.OrganizerId;
 
                 _context.Update(evnt);
@@ -211,8 +211,7 @@ public class EventController : Controller
         {
             return NotFound();
         }
-
-        // Check permissions
+        
         var userId = _userManager.GetUserId(User);
         if (eventItem.OrganizerId != userId && !User.IsInRole("Admin"))
         {
@@ -234,8 +233,7 @@ public class EventController : Controller
         {
             return NotFound();
         }
-
-        // Check permissions
+        
         var userId = _userManager.GetUserId(User);
         if (eventItem.OrganizerId != userId && !User.IsInRole("Admin"))
         {

@@ -6,14 +6,12 @@
 
 <div class="container py-4">
     <div class="row">
-        <!-- Main Event Details -->
         <div class="col-md-8">
             <div class="card shadow-lg">
                 <div class="card-header bg-primary text-white">
                     <h2 class="mb-0">@Model.Name</h2>
                 </div>
                 <div class="card-body">
-                    <!-- Event Information Grid -->
                     <dl class="row">
                         <dt class="col-sm-4">
                             <i class="fas fa-calendar text-primary"></i> Start Date
@@ -84,7 +82,6 @@
                         }
                     </dl>
 
-                    <!-- Action Buttons for Organizers -->
                     @if (User.Identity.IsAuthenticated && 
                          (Model.OrganizerId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value || 
                           User.IsInRole("Admin")))
@@ -181,20 +178,6 @@
                     </div>
                 </div>
             }
-
-            <!-- Additional Info -->
-            <div class="card shadow-sm mt-3">
-                <div class="card-body">
-                    <h6 class="card-title"><i class="fas fa-shield-alt"></i> Secure Checkout</h6>
-                    <p class="card-text small text-muted mb-2">
-                        Your transaction is secure and your information is protected.
-                    </p>
-                    <h6 class="card-title"><i class="fas fa-mobile-alt"></i> Mobile Tickets</h6>
-                    <p class="card-text small text-muted mb-0">
-                        Access your tickets anytime from your dashboard.
-                    </p>
-                </div>
-            </div>
         </div>
     </div>
 

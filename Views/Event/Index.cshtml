@@ -5,7 +5,6 @@
 }
 
 <div class="container py-4">
-    <!-- Page Header -->
     <div class="row mb-4">
         <div class="col-md-8">
             <h1 class="display-5">
@@ -23,7 +22,6 @@
         </div>
     </div>
 
-    <!-- Search and Filter Section -->
     <div class="row mb-4">
         <div class="col-md-8">
             <div class="input-group input-group-lg">
@@ -45,7 +43,6 @@
         </div>
     </div>
 
-    <!-- Stats Banner (Optional) -->
     @if (Model != null && Model.Any())
     {
         <div class="row mb-4">
@@ -61,7 +58,6 @@
         </div>
     }
 
-    <!-- Loading Spinner -->
     <div id="loadingSpinner" class="text-center py-5" style="display: none;">
         <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -69,12 +65,10 @@
         <p class="mt-2 text-muted">Searching events...</p>
     </div>
 
-    <!-- Events Container -->
     <div id="eventsContainer">
         @await Html.PartialAsync("_EventCard", Model)
     </div>
 
-    <!-- Empty State -->
     @if (Model == null || !Model.Any())
     {
         <div class="text-center py-5">
@@ -97,7 +91,6 @@
         $(document).ready(function() {
             let searchTimeout;
             
-            // Search functionality with debounce
             $("#searchBox").on("keyup", function () {
                 clearTimeout(searchTimeout);
                 var query = $(this).val();
@@ -118,10 +111,8 @@
                 }, 300); // 300ms debounce
             });
 
-            // Sort functionality (client-side for now)
             $("#sortBy").on("change", function() {
                 var sortValue = $(this).val();
-                // You can implement AJAX sorting here if needed
                 console.log("Sorting by: " + sortValue);
             });
         });

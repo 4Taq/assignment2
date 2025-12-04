@@ -6,18 +6,17 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Serilog
+
 Log.Logger = new LoggerConfiguration().WriteTo.Console()
     .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
     .CreateBootstrapLogger();
 builder.Host.UseSerilog();
 
-// PostgreSQL
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
-// Identity + Roles
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
     options.SignIn.RequireConfirmedEmail = true;
@@ -29,11 +28,11 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 .AddDefaultTokenProviders();
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages(); // Important for Identity pages
+builder.Services.AddRazorPages(); 
 
 var app = builder.Build();
 
-// Seed Roles + Admin
+
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();

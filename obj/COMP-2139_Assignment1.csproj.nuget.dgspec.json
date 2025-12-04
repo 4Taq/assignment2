@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\COMP-2139_Assignment1\\COMP-2139_Assignment1.csproj": {}
+    "D:\\COMP-2139_Assignment2\\COMP-2139_Assignment1.csproj": {}
   },
   "projects": {
-    "D:\\COMP-2139_Assignment1\\COMP-2139_Assignment1.csproj": {
+    "D:\\COMP-2139_Assignment2\\COMP-2139_Assignment1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\COMP-2139_Assignment1\\COMP-2139_Assignment1.csproj",
+        "projectUniqueName": "D:\\COMP-2139_Assignment2\\COMP-2139_Assignment1.csproj",
         "projectName": "COMP-2139_Assignment1",
-        "projectPath": "D:\\COMP-2139_Assignment1\\COMP-2139_Assignment1.csproj",
+        "projectPath": "D:\\COMP-2139_Assignment2\\COMP-2139_Assignment1.csproj",
         "packagesPath": "C:\\Users\\ataa3\\.nuget\\packages\\",
-        "outputPath": "D:\\COMP-2139_Assignment1\\obj\\",
+        "outputPath": "D:\\COMP-2139_Assignment2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ataa3\\AppData\\Roaming\\NuGet\\NuGet.Config"
