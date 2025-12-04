@@ -80,31 +80,31 @@ using (var scope = app.Services.CreateScope())
         {
             new Event 
             { 
-                Name = "Coldplay Concert 2025", 
+                Name = "Concert", 
                 StartDate = utcToday.AddDays(30), 
                 EndDate = utcToday.AddDays(31), 
                 Capacity = 5000, 
-                Price = 150, 
+                Price = 149.99, 
                 CategoryId = 1, 
                 OrganizerId = adminUser.Id 
             },
             new Event 
             { 
-                Name = "NBA Finals Watch Party", 
+                Name = "Football Finals Watch Party", 
                 StartDate = utcToday.AddDays(10), 
                 EndDate = utcToday.AddDays(10), 
                 Capacity = 200, 
-                Price = 45, 
+                Price = 49.99, 
                 CategoryId = 2, 
                 OrganizerId = adminUser.Id 
             },
             new Event 
             { 
-                Name = "ASP.NET Core Conference", 
+                Name = ".NET Conference", 
                 StartDate = utcToday.AddDays(60), 
                 EndDate = utcToday.AddDays(62), 
                 Capacity = 300, 
-                Price = 299, 
+                Price = 299.99, 
                 CategoryId = 3, 
                 OrganizerId = adminUser.Id 
             }
