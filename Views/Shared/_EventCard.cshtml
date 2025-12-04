@@ -1,0 +1,113 @@
+﻿@model List<Event>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <i class="fas fa-info-circle"></i> No events found matching your search.
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        @foreach (var ev in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm hover-shadow">
+                    @* Optional: Add event image placeholder *@
+                    <div class="card-img-top bg-light text-center py-4" style="height: 150px;">
+                        <i class="fas fa-calendar-alt" style="font-size: 3rem; color: #6c757d;"></i>
+                    </div>
+                    
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-truncate" title="@ev.Name">@ev.Name</h5>
+                        
+                        <div class="mb-3">
+                            <p class="card-text small mb-2">
+                                <i class="fas fa-calendar text-primary"></i> 
+                                <strong>Date:</strong> @ev.StartDate.ToString("MMM dd, yyyy")
+                            </p>
+                            
+                            <p class="card-text small mb-2">
+                                <i class="fas fa-tag text-primary"></i> 
+                                <strong>Category:</strong> 
+                                <span class="badge bg-info">@(ev.Category?.Name ?? "Uncategorized")</span>
+                            </p>
+                            
+                            <p class="card-text small mb-2">
+                                <i class="fas fa-dollar-sign text-success"></i> 
+                                <strong>Price:</strong> 
+                                @if (ev.Price.HasValue && ev.Price.Value > 0)
+                                {
+                                    <span class="text-success fw-bold">$@ev.Price.Value</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">FREE</span>
+                                }
+                            </p>
+                            
+                            <p class="card-text small mb-0">
+                                <i class="fas fa-chair text-primary"></i> 
+                                <strong>Capacity:</strong> @ev.Capacity seats
+                            </p>
+                        </div>
+                        
+                        <div class="mt-auto">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="d-grid gap-2">
+                                    <a asp-controller="Purchase" 
+                                       asp-action="Create" 
+                                       asp-route-eventId="@ev.Id" 
+                                       class="btn btn-success">
+                                        <i class="fas fa-shopping-cart"></i> Buy Tickets
+                                    </a>
+                                    <a asp-controller="Event" 
+                                       asp-action="Details" 
+                                       asp-route-id="@ev.Id" 
+                                       class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-info-circle"></i> View Details
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="d-grid gap-2">
+                                    <a asp-area="Identity" 
+                                       asp-page="/Account/Login" 
+                                       class="btn btn-primary">
+                                        <i class="fas fa-sign-in-alt"></i> Login to Buy
+                                    </a>
+                                    <a asp-controller="Event" 
+                                       asp-action="Details" 
+                                       asp-route-id="@ev.Id" 
+                                       class="btn btn-outline-secondary btn-sm">
+                                        <i class="fas fa-info-circle"></i> View Details
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer bg-light text-muted small">
+                        <i class="fas fa-user"></i> 
+                        <strong>Organizer:</strong> @(ev.Organizer?.FullName ?? "Unknown")
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<style>
+    .hover-shadow {
+        transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+    
+    .hover-shadow:hover {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        transform: translateY(-5px);
+    }
+</style>

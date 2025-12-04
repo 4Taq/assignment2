@@ -1,0 +1,128 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "Purchase Confirmation";
+    var tickets = ViewBag.Tickets as List<Ticket>;
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            
+            <div class="text-center mb-4">
+                <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                <h1 class="display-5 mt-3">Purchase Successful!</h1>
+                <p class="lead text-muted">Your tickets have been confirmed</p>
+            </div>
+            
+            <div class="card shadow-lg mb-4">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0"><i class="fas fa-receipt"></i> Order Summary</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <p class="mb-2"><strong>Order ID:</strong> #@Model.Id</p>
+                            <p class="mb-2"><strong>Purchase Date:</strong> @Model.PurchasedAt.ToString("MMM dd, yyyy HH:mm")</p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <p class="mb-2"><strong>Quantity:</strong> @Model.Quantity ticket(s)</p>
+                            <h4 class="text-success"><strong>Total Paid:</strong> $@Model.TotalPrice</h4>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                   
+                    <h5 class="mb-3"><i class="fas fa-calendar-alt"></i> Event Details</h5>
+                    <div class="alert alert-info">
+                        <h5 class="alert-heading">@Model.Event.Name</h5>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <p class="mb-2">
+                                    <i class="fas fa-calendar"></i> 
+                                    <strong>Date:</strong> @Model.Event.StartDate.ToString("dddd, MMM dd, yyyy")
+                                </p>
+                                <p class="mb-2">
+                                    <i class="fas fa-clock"></i> 
+                                    <strong>Time:</strong> @Model.Event.StartDate.ToString("hh:mm tt")
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-2">
+                                    <i class="fas fa-tag"></i> 
+                                    <strong>Category:</strong> @Model.Event.Category?.Name
+                                </p>
+                                <p class="mb-2">
+                                    <i class="fas fa-map-marker-alt"></i> 
+                                    <strong>Capacity:</strong> @Model.Event.Capacity
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        
+            @if (tickets != null && tickets.Any())
+            {
+                <div class="card shadow-lg mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0"><i class="fas fa-ticket-alt"></i> Your Tickets</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach (var ticket in tickets)
+                            {
+                                <div class="col-md-6 mb-3">
+                                    <div class="card border-primary">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Ticket #@ticket.Id</h6>
+                                            <p class="card-text small mb-2">
+                                                <strong>Code:</strong> 
+                                                <code>@ticket.TicketCode</code>
+                                            </p>
+                                            <p class="card-text small mb-0">
+                                                <strong>Issued:</strong> @ticket.PurchasedAt.ToString("MMM dd, yyyy")
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="alert alert-warning mt-3" role="alert">
+                            <i class="fas fa-info-circle"></i> 
+                            <strong>Important:</strong> Please save your ticket codes. You can also view them in your 
+                            <a asp-controller="Dashboard" asp-action="Index" class="alert-link">Dashboard</a>.
+                        </div>
+                    </div>
+                </div>
+            }
+
+           
+            <div class="text-center">
+                <a asp-controller="Dashboard" asp-action="Index" class="btn btn-primary btn-lg me-2">
+                    <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+                </a>
+                <a asp-controller="Event" asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                    <i class="fas fa-calendar"></i> Browse More Events
+                </a>
+            </div>
+
+            
+            <div class="text-center mt-4">
+                <p class="text-muted">
+                    <i class="fas fa-envelope"></i> A confirmation email has been sent to your registered email address.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            console.log('Purchase confirmed!');
+        });
+    </script>
+}

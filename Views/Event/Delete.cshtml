@@ -1,0 +1,157 @@
+@model Event
+
+@{ 
+    ViewData["Title"] = "Delete Event";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h2 class="mb-0">
+                        <i class="fas fa-trash-alt"></i> Delete Event
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Warning Message -->
+                    <div class="alert alert-danger d-flex align-items-center">
+                        <i class="fas fa-exclamation-triangle fa-2x me-3"></i>
+                        <div>
+                            <h5 class="alert-heading mb-1">Are you sure you want to delete this event?</h5>
+                            <p class="mb-0">This action cannot be undone!</p>
+                        </div>
+                    </div>
+
+                    <!-- Event Details to be Deleted -->
+                    <div class="card bg-light mb-4">
+                        <div class="card-body">
+                            <h4 class="card-title mb-3">@Model.Name</h4>
+                            
+                            <dl class="row mb-0">
+                                <dt class="col-sm-4">
+                                    <i class="fas fa-hashtag text-muted"></i> Event ID
+                                </dt>
+                                <dd class="col-sm-8">@Model.Id</dd>
+
+                                <dt class="col-sm-4">
+                                    <i class="fas fa-calendar text-muted"></i> Start Date
+                                </dt>
+                                <dd class="col-sm-8">@Model.StartDate.ToString("dddd, MMMM dd, yyyy")</dd>
+
+                                <dt class="col-sm-4">
+                                    <i class="fas fa-calendar-check text-muted"></i> End Date
+                                </dt>
+                                <dd class="col-sm-8">@Model.EndDate.ToString("dddd, MMMM dd, yyyy")</dd>
+
+                                <dt class="col-sm-4">
+                                    <i class="fas fa-tag text-muted"></i> Category
+                                </dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge bg-info">@Model.Category?.Name</span>
+                                </dd>
+
+                                <dt class="col-sm-4">
+                                    <i class="fas fa-chair text-muted"></i> Capacity
+                                </dt>
+                                <dd class="col-sm-8">@Model.Capacity seats</dd>
+
+                                @if (Model.Price.HasValue)
+                                {
+                                    <dt class="col-sm-4">
+                                        <i class="fas fa-dollar-sign text-muted"></i> Price
+                                    </dt>
+                                    <dd class="col-sm-8">$@Model.Price.Value</dd>
+                                }
+
+                                <dt class="col-sm-4">
+                                    <i class="fas fa-user text-muted"></i> Organizer
+                                </dt>
+                                <dd class="col-sm-8 mb-0">@Model.Organizer?.FullName</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <!-- Tickets Warning -->
+                    @if (Model.Tickets != null && Model.Tickets.Any())
+                    {
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <strong>Warning:</strong> This event has <strong>@Model.Tickets.Count ticket(s)</strong> sold. 
+                            You cannot delete an event with existing tickets.
+                        </div>
+                    }
+
+                    <!-- Additional Warnings -->
+                    <div class="card border-warning mb-4">
+                        <div class="card-body">
+                            <h6 class="card-title text-warning">
+                                <i class="fas fa-info-circle"></i> Important Information
+                            </h6>
+                            <ul class="mb-0 small">
+                                <li>All event data will be permanently deleted</li>
+                                <li>This action cannot be reversed</li>
+                                <li>Event history will be removed from the system</li>
+                                @if (!Model.Tickets.Any())
+                                {
+                                    <li class="text-success">
+                                        <strong>No tickets have been sold - safe to delete</strong>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Delete Form -->
+                    @if (!Model.Tickets.Any())
+                    {
+                        <form asp-action="Delete" method="post">
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.Id)
+                            
+                            <div class="d-flex gap-2 justify-content-between">
+                                <div>
+                                    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info">
+                                        <i class="fas fa-eye"></i> View Event
+                                    </a>
+                                    <a asp-action="Index" class="btn btn-secondary">
+                                        <i class="fas fa-arrow-left"></i> Back to List
+                                    </a>
+                                </div>
+                                <button type="submit" class="btn btn-danger btn-lg" onclick="return confirm('Are you absolutely sure? This cannot be undone!');">
+                                    <i class="fas fa-trash"></i> Yes, Delete Event
+                                </button>
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <div class="d-flex gap-2">
+                            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info">
+                                <i class="fas fa-eye"></i> View Event
+                            </a>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to List
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Help Card -->
+            <div class="card mt-4 border-info">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0">
+                        <i class="fas fa-question-circle"></i> Need Help?
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <p class="mb-0 small">
+                        If you need to cancel an event with sold tickets, consider updating the event details 
+                        to notify attendees or contact support for assistance with refunds.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,196 @@
+@model Event
+
+@{ 
+    ViewData["Title"] = "Edit Event";
+}
+
+@{
+    if (!User.IsInRole("Organizer") && !User.IsInRole("Admin"))
+    {
+        <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle"></i> 
+            Only Organizers and Admins can edit events.
+        </div>
+        return;
+    }
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-lg">
+                <div class="card-header bg-warning text-dark">
+                    <h2 class="mb-0">
+                        <i class="fas fa-edit"></i> Edit Event
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit" method="post">
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="row">
+                            <!-- Event Name -->
+                            <div class="col-md-12 mb-3">
+                                <label asp-for="Name" class="form-label fw-bold">
+                                    <i class="fas fa-heading text-primary"></i> Event Name *
+                                </label>
+                                <input asp-for="Name" 
+                                       class="form-control form-control-lg" 
+                                       required />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                            <!-- Date Range -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="StartDate" class="form-label fw-bold">
+                                    <i class="fas fa-calendar-alt text-primary"></i> Start Date *
+                                </label>
+                                <input asp-for="StartDate" 
+                                       type="date" 
+                                       class="form-control"
+                                       required />
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="EndDate" class="form-label fw-bold">
+                                    <i class="fas fa-calendar-check text-primary"></i> End Date *
+                                </label>
+                                <input asp-for="EndDate" 
+                                       type="date" 
+                                       class="form-control"
+                                       required />
+                                <span asp-validation-for="EndDate" class="text-danger"></span>
+                            </div>
+
+                            <!-- Category and Capacity -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="CategoryId" class="form-label fw-bold">
+                                    <i class="fas fa-tag text-primary"></i> Category *
+                                </label>
+                                <select asp-for="CategoryId" 
+                                        class="form-select" 
+                                        asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))"
+                                        required>
+                                    <option value="">-- Select Category --</option>
+                                </select>
+                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Capacity" class="form-label fw-bold">
+                                    <i class="fas fa-chair text-primary"></i> Capacity *
+                                </label>
+                                <input asp-for="Capacity" 
+                                       type="number" 
+                                       class="form-control"
+                                       min="1"
+                                       required />
+                                <span asp-validation-for="Capacity" class="text-danger"></span>
+                                <small class="form-text text-muted">
+                                    Total number of tickets available
+                                </small>
+                            </div>
+
+                            <!-- Price -->
+                            <div class="col-md-12 mb-3">
+                                <label asp-for="Price" class="form-label fw-bold">
+                                    <i class="fas fa-dollar-sign text-primary"></i> Ticket Price
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input asp-for="Price" 
+                                           type="number" 
+                                           step="0.01"
+                                           min="0"
+                                           class="form-control" />
+                                </div>
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                                <small class="form-text text-muted">
+                                    Leave blank or set to 0 for free events
+                                </small>
+                            </div>
+                        </div>
+
+                        <!-- Validation Summary -->
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <!-- Warning Message -->
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>Warning:</strong> Changes to event details will affect all existing ticket holders. 
+                            Make sure to notify attendees of any major changes.
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex gap-2 justify-content-between">
+                            <div>
+                                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info">
+                                    <i class="fas fa-eye"></i> View Event
+                                </a>
+                                <a asp-action="Index" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left"></i> Back to List
+                                </a>
+                            </div>
+                            <button type="submit" class="btn btn-warning btn-lg">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Event Stats (Optional) -->
+            <div class="card mt-4 border-info">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="fas fa-chart-bar"></i> Event Statistics</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <h3 class="text-primary">@Model.Tickets.Count</h3>
+                            <p class="text-muted mb-0">Tickets Sold</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h3 class="text-success">@(Model.Capacity - Model.Tickets.Count)</h3>
+                            <p class="text-muted mb-0">Available</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h3 class="text-info">@((Model.Tickets.Count * 100.0 / Model.Capacity).ToString("F1"))%</h3>
+                            <p class="text-muted mb-0">Sold</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            $('#StartDate').on('change', function() {
+                var startDate = $(this).val();
+                $('#EndDate').attr('min', startDate);
+                
+                if ($('#EndDate').val() && $('#EndDate').val() < startDate) {
+                    $('#EndDate').val('');
+                }
+            });
+
+            $('form').on('submit', function(e) {
+                var startDate = new Date($('#StartDate').val());
+                var endDate = new Date($('#EndDate').val());
+                
+                if (endDate < startDate) {
+                    e.preventDefault();
+                    alert('End date must be after start date');
+                    return false;
+                }
+            });
+        });
+    </script>
+}

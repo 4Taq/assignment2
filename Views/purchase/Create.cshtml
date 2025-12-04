@@ -1,0 +1,129 @@
+﻿@{
+    ViewData["Title"] = "Purchase Tickets";
+    var eventItem = ViewBag.Event as Event;
+    var availableCapacity = (int)ViewBag.AvailableCapacity;
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0"><i class="fas fa-ticket-alt"></i> Purchase Tickets</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Event Information -->
+                    <div class="alert alert-info">
+                        <h4 class="alert-heading">@eventItem.Name</h4>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="mb-2">
+                                    <i class="fas fa-calendar"></i> 
+                                    <strong>Start:</strong> @eventItem.StartDate.ToString("MMM dd, yyyy")
+                                </p>
+                                <p class="mb-2">
+                                    <i class="fas fa-calendar-check"></i> 
+                                    <strong>End:</strong> @eventItem.EndDate.ToString("MMM dd, yyyy")
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-2">
+                                    <i class="fas fa-tag"></i> 
+                                    <strong>Category:</strong> @eventItem.Category?.Name
+                                </p>
+                                <p class="mb-2">
+                                    <i class="fas fa-user"></i> 
+                                    <strong>Organizer:</strong> @eventItem.Organizer?.FullName
+                                </p>
+                            </div>
+                        </div>
+                        <p class="mb-0 mt-2">
+                            <i class="fas fa-chair"></i> 
+                            <strong>Available Tickets:</strong> 
+                            <span class="badge bg-success">@availableCapacity / @eventItem.Capacity</span>
+                        </p>
+                    </div>
+
+                    <!-- Purchase Form -->
+                    <form asp-action="Create" method="post" id="purchaseForm">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="eventId" value="@eventItem.Id" />
+
+                        <div class="mb-4">
+                            <label for="quantity" class="form-label">
+                                <strong>Number of Tickets</strong>
+                            </label>
+                            <input type="number" 
+                                   class="form-control form-control-lg" 
+                                   id="quantity" 
+                                   name="quantity" 
+                                   min="1" 
+                                   max="@availableCapacity" 
+                                   value="1" 
+                                   required>
+                            <small class="form-text text-muted">
+                                Maximum @availableCapacity tickets available
+                            </small>
+                        </div>
+
+                        <!-- Price Calculation -->
+                        <div class="card bg-light mb-4">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <p class="mb-2">
+                                            <strong>Price per ticket:</strong> 
+                                            $<span id="pricePerTicket">@(eventItem.Price ?? 0)</span>
+                                        </p>
+                                        <p class="mb-2">
+                                            <strong>Quantity:</strong> 
+                                            <span id="displayQuantity">1</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6 text-md-end">
+                                        <h4 class="mb-0">
+                                            <strong>Total:</strong> 
+                                            <span class="text-success">$<span id="totalPrice">@(eventItem.Price ?? 0)</span></span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Validation Summary -->
+                        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-shopping-cart"></i> Complete Purchase
+                            </button>
+                            <a asp-controller="Event" asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Events
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            var pricePerTicket = parseFloat('@(eventItem.Price ?? 0)');
+            
+            $('#quantity').on('input', function() {
+                var quantity = parseInt($(this).val()) || 1;
+                var total = (pricePerTicket * quantity).toFixed(2);
+                
+                $('#displayQuantity').text(quantity);
+                $('#totalPrice').text(total);
+            });
+        });
+    </script>
+}
