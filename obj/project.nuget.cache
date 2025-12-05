@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "K4wyyGKAKB4=",
+  "dgSpecHash": "hZdAsBMvctE=",
   "success": true,
   "projectFilePath": "D:\\COMP-2139_Assignment2\\COMP-2139_Assignment1.csproj",
   "expectedPackageFiles": [
@@ -89,12 +89,16 @@
     "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.configuration\\10.0.0\\microsoft.extensions.configuration.10.0.0.nupkg.sha512",
     "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.0\\microsoft.extensions.configuration.abstractions.10.0.0.nupkg.sha512",
     "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.configuration.binder\\10.0.0\\microsoft.extensions.configuration.binder.10.0.0.nupkg.sha512",
+    "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.configuration.fileextensions\\10.0.0\\microsoft.extensions.configuration.fileextensions.10.0.0.nupkg.sha512",
+    "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.configuration.json\\10.0.0\\microsoft.extensions.configuration.json.10.0.0.nupkg.sha512",
     "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\10.0.0\\microsoft.extensions.dependencyinjection.10.0.0.nupkg.sha512",
     "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.0\\microsoft.extensions.dependencyinjection.abstractions.10.0.0.nupkg.sha512",
     "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.dependencymodel\\10.0.0\\microsoft.extensions.dependencymodel.10.0.0.nupkg.sha512",
     "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.diagnostics.abstractions\\10.0.0\\microsoft.extensions.diagnostics.abstractions.10.0.0.nupkg.sha512",
     "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\10.0.0\\microsoft.extensions.fileproviders.abstractions.10.0.0.nupkg.sha512",
     "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.fileproviders.embedded\\8.0.10\\microsoft.extensions.fileproviders.embedded.8.0.10.nupkg.sha512",
+    "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\10.0.0\\microsoft.extensions.fileproviders.physical.10.0.0.nupkg.sha512",
+    "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\10.0.0\\microsoft.extensions.filesystemglobbing.10.0.0.nupkg.sha512",
     "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\10.0.0\\microsoft.extensions.hosting.abstractions.10.0.0.nupkg.sha512",
     "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.identity.core\\9.0.0\\microsoft.extensions.identity.core.9.0.0.nupkg.sha512",
     "C:\\Users\\ataa3\\.nuget\\packages\\microsoft.extensions.identity.stores\\9.0.0\\microsoft.extensions.identity.stores.9.0.0.nupkg.sha512",
@@ -233,5 +237,18 @@
     "C:\\Users\\ataa3\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\ataa3\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "message": "COMP-2139_Assignment1 depends on Microsoft.Extensions.Configuration.Json (>= 9.0.305) but Microsoft.Extensions.Configuration.Json 9.0.305 was not found. Microsoft.Extensions.Configuration.Json 10.0.0 was resolved instead.",
+      "projectPath": "D:\\COMP-2139_Assignment2\\COMP-2139_Assignment1.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\COMP-2139_Assignment2\\COMP-2139_Assignment1.csproj",
+      "libraryId": "Microsoft.Extensions.Configuration.Json",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }

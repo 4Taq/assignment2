@@ -12,6 +12,7 @@
           "Microsoft.AspNetCore.Identity.UI": "8.0.10",
           "Microsoft.EntityFrameworkCore": "9.0.0",
           "Microsoft.EntityFrameworkCore.Tools": "9.0.0",
+          "Microsoft.Extensions.Configuration.Json": "10.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "9.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.1",
           "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.1.0",
@@ -1282,6 +1283,36 @@
           }
         }
       },
+      "Microsoft.Extensions.Configuration.FileExtensions/10.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "10.0.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.0",
+          "Microsoft.Extensions.FileProviders.Abstractions": "10.0.0",
+          "Microsoft.Extensions.FileProviders.Physical": "10.0.0",
+          "Microsoft.Extensions.Primitives": "10.0.0"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.Configuration.FileExtensions.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.52411"
+          }
+        }
+      },
+      "Microsoft.Extensions.Configuration.Json/10.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "10.0.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.0",
+          "Microsoft.Extensions.Configuration.FileExtensions": "10.0.0",
+          "Microsoft.Extensions.FileProviders.Abstractions": "10.0.0",
+          "System.Text.Json": "10.0.0"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.Configuration.Json.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.52411"
+          }
+        }
+      },
       "Microsoft.Extensions.DependencyInjection/10.0.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.0"
@@ -1340,6 +1371,27 @@
       "Microsoft.Extensions.FileProviders.Embedded/8.0.10": {
         "dependencies": {
           "Microsoft.Extensions.FileProviders.Abstractions": "10.0.0"
+        }
+      },
+      "Microsoft.Extensions.FileProviders.Physical/10.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.FileProviders.Abstractions": "10.0.0",
+          "Microsoft.Extensions.FileSystemGlobbing": "10.0.0",
+          "Microsoft.Extensions.Primitives": "10.0.0"
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.FileProviders.Physical.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.52411"
+          }
+        }
+      },
+      "Microsoft.Extensions.FileSystemGlobbing/10.0.0": {
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.FileSystemGlobbing.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.52411"
+          }
         }
       },
       "Microsoft.Extensions.Hosting.Abstractions/10.0.0": {
@@ -3375,6 +3427,20 @@
       "path": "microsoft.extensions.configuration.binder/10.0.0",
       "hashPath": "microsoft.extensions.configuration.binder.10.0.0.nupkg.sha512"
     },
+    "Microsoft.Extensions.Configuration.FileExtensions/10.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LqCTyF0twrG4tyEN6PpSC5ewRBDwCBazRUfCOdRddwaQ3n2S57GDDeYOlTLcbV/V2dxSSZWg5Ofr48h6BsBmxw==",
+      "path": "microsoft.extensions.configuration.fileextensions/10.0.0",
+      "hashPath": "microsoft.extensions.configuration.fileextensions.10.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.Json/10.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-BIOPTEAZoeWbHlDT9Zudu+rpecZizFwhdIFRiyZKDml7JbayXmfTXKUt+ezifsSXfBkWDdJM10oDOxo8pufEng==",
+      "path": "microsoft.extensions.configuration.json/10.0.0",
+      "hashPath": "microsoft.extensions.configuration.json.10.0.0.nupkg.sha512"
+    },
     "Microsoft.Extensions.DependencyInjection/10.0.0": {
       "type": "package",
       "serviceable": true,
@@ -3416,6 +3482,20 @@
       "sha512": "sha512-N/Ow71LLKXbC4fOFoAG7QNyyhgRypd8in8lc92xInZyyNFlBTgGR3R1BV91Wr5+1/l9+Qvo+2Ee2cAth43OP/Q==",
       "path": "microsoft.extensions.fileproviders.embedded/8.0.10",
       "hashPath": "microsoft.extensions.fileproviders.embedded.8.0.10.nupkg.sha512"
+    },
+    "Microsoft.Extensions.FileProviders.Physical/10.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UZUQ74lQMmvcprlG8w+XpxBbyRDQqfb7GAnccITw32hdkUBlmm9yNC4xl4aR9YjgV3ounZcub194sdmLSfBmPA==",
+      "path": "microsoft.extensions.fileproviders.physical/10.0.0",
+      "hashPath": "microsoft.extensions.fileproviders.physical.10.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.FileSystemGlobbing/10.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5hfVl/e+bx1px2UkN+1xXhd3hu7Ui6ENItBzckFaRDQXfr+SHT/7qrCDrlQekCF/PBtEu2vtk87U2+gDEF8EhQ==",
+      "path": "microsoft.extensions.filesystemglobbing/10.0.0",
+      "hashPath": "microsoft.extensions.filesystemglobbing.10.0.0.nupkg.sha512"
     },
     "Microsoft.Extensions.Hosting.Abstractions/10.0.0": {
       "type": "package",

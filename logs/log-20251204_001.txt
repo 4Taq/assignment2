@@ -1,0 +1,185 @@
+2025-12-04 18:18:44.786 -05:00 [INF] User profile is available. Using 'C:\Users\ataa3\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-12-04 18:18:48.652 -05:00 [INF] Executed DbCommand (299ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-04 18:18:48.966 -05:00 [INF] Executed DbCommand (146ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-04 18:18:49.177 -05:00 [INF] Executed DbCommand (203ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-04 18:18:49.342 -05:00 [INF] Executed DbCommand (137ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePicture", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-12-04 18:18:49.599 -05:00 [INF] Executed DbCommand (153ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePicture", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-12-04 18:18:50.215 -05:00 [ERR] Failed executing DbCommand (267ms) [Parameters=[@p0='?', @p1='?' (DbType = Int32), @p2='?', @p3='?', @p4='?' (DbType = Boolean), @p5='?', @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTime), @p8='?', @p9='?', @p10='?', @p11='?', @p12='?' (DbType = Boolean), @p13='?', @p14='?', @p15='?' (DbType = Boolean), @p16='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUsers" ("Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePicture", "SecurityStamp", "TwoFactorEnabled", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16);
+2025-12-04 18:18:50.274 -05:00 [ERR] An exception occurred in the database while saving changes for context type 'COMP_2139_Assignment_1.Data.ApplicationDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23505: duplicate key value violates unique constraint "UserNameIndex"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23505
+    MessageText: duplicate key value violates unique constraint "UserNameIndex"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: AspNetUsers
+    ConstraintName: UserNameIndex
+    File: nbtinsert.c
+    Line: 666
+    Routine: _bt_check_unique
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23505: duplicate key value violates unique constraint "UserNameIndex"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23505
+    MessageText: duplicate key value violates unique constraint "UserNameIndex"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: AspNetUsers
+    ConstraintName: UserNameIndex
+    File: nbtinsert.c
+    Line: 666
+    Routine: _bt_check_unique
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2025-12-04 18:19:06.935 -05:00 [INF] User profile is available. Using 'C:\Users\ataa3\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-12-04 18:19:12.953 -05:00 [INF] Executed DbCommand (866ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-04 18:19:13.992 -05:00 [INF] Executed DbCommand (766ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-04 18:19:14.251 -05:00 [INF] Executed DbCommand (247ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-04 18:19:14.493 -05:00 [INF] Executed DbCommand (201ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePicture", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-12-04 18:19:14.970 -05:00 [INF] Executed DbCommand (178ms) [Parameters=[@__catName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Categories" AS c
+    WHERE c."Name" = @__catName_0)
+2025-12-04 18:19:15.110 -05:00 [INF] Executed DbCommand (126ms) [Parameters=[@__catName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Categories" AS c
+    WHERE c."Name" = @__catName_0)
+2025-12-04 18:19:15.309 -05:00 [INF] Executed DbCommand (185ms) [Parameters=[@__catName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Categories" AS c
+    WHERE c."Name" = @__catName_0)
+2025-12-04 18:19:15.983 -05:00 [INF] Executed DbCommand (663ms) [Parameters=[@__catName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Categories" AS c
+    WHERE c."Name" = @__catName_0)
+2025-12-04 18:19:16.112 -05:00 [INF] Executed DbCommand (118ms) [Parameters=[@__catName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Categories" AS c
+    WHERE c."Name" = @__catName_0)
+2025-12-04 18:19:16.329 -05:00 [INF] Executed DbCommand (165ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Events" AS e)
+2025-12-04 18:19:16.731 -05:00 [INF] Now listening on: http://localhost:5105
+2025-12-04 18:19:16.742 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-04 18:19:16.746 -05:00 [INF] Hosting environment: Development
+2025-12-04 18:19:16.752 -05:00 [INF] Content root path: D:\COMP-2139_Assignment2
+2025-12-04 18:19:27.341 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5105/ - null null
+2025-12-04 18:19:27.364 -05:00 [WRN] Failed to determine the https port for redirect.
+2025-12-04 18:19:27.456 -05:00 [INF] Executing endpoint 'COMP_2139_Assignment_1.Controllers.HomeController.Index (COMP-2139_Assignment1)'
+2025-12-04 18:19:27.485 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller COMP_2139_Assignment_1.Controllers.HomeController (COMP-2139_Assignment1).
+2025-12-04 18:19:27.512 -05:00 [INF] Executing action method COMP_2139_Assignment_1.Controllers.HomeController.Index (COMP-2139_Assignment1) - Validation state: "Valid"
+2025-12-04 18:19:27.528 -05:00 [INF] Executed action method COMP_2139_Assignment_1.Controllers.HomeController.Index (COMP-2139_Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 1.5013ms.
+2025-12-04 18:19:27.588 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-04 18:19:27.795 -05:00 [INF] Executed ViewResult - view Index executed in 210.8853ms.
+2025-12-04 18:19:27.802 -05:00 [INF] Executed action COMP_2139_Assignment_1.Controllers.HomeController.Index (COMP-2139_Assignment1) in 308.0574ms
+2025-12-04 18:19:27.808 -05:00 [INF] Executed endpoint 'COMP_2139_Assignment_1.Controllers.HomeController.Index (COMP-2139_Assignment1)'
+2025-12-04 18:19:27.817 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5105/ - 200 null text/html; charset=utf-8 479.6061ms
+2025-12-04 18:19:27.945 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5105/css/site.css?v=zeR5PHeeHbxfGkL8WV86OzdoF6UnjuCmnagaocD-cbo - null null
+2025-12-04 18:19:27.980 -05:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'D:\COMP-2139_Assignment2\wwwroot\css\site.css'
+2025-12-04 18:19:27.985 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5105/css/site.css?v=zeR5PHeeHbxfGkL8WV86OzdoF6UnjuCmnagaocD-cbo - 499 637 text/css 40.1306ms
+2025-12-04 18:19:31.386 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5105/Event - null null
+2025-12-04 18:19:31.402 -05:00 [INF] Executing endpoint 'EventController.Index (COMP-2139_Assignment1)'
+2025-12-04 18:19:31.416 -05:00 [INF] Route matched with {action = "Index", controller = "Event", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller EventController (COMP-2139_Assignment1).
+2025-12-04 18:19:31.443 -05:00 [INF] Executing action method EventController.Index (COMP-2139_Assignment1) - Validation state: "Valid"
+2025-12-04 18:19:32.182 -05:00 [INF] Executed DbCommand (548ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT e."Id", e."Capacity", e."CategoryId", e."EndDate", e."Name", e."OrganizerId", e."Price", e."StartDate", c."Id", c."Name", a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePicture", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "Events" AS e
+INNER JOIN "Categories" AS c ON e."CategoryId" = c."Id"
+INNER JOIN "AspNetUsers" AS a ON e."OrganizerId" = a."Id"
+ORDER BY e."StartDate"
+2025-12-04 18:19:32.338 -05:00 [INF] Executed action method EventController.Index (COMP-2139_Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 889.9844ms.
+2025-12-04 18:19:32.358 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-04 18:19:32.430 -05:00 [INF] Executed ViewResult - view Index executed in 74.1933ms.
+2025-12-04 18:19:32.450 -05:00 [INF] Executed action EventController.Index (COMP-2139_Assignment1) in 1023.7317ms
+2025-12-04 18:19:32.462 -05:00 [INF] Executed endpoint 'EventController.Index (COMP-2139_Assignment1)'
+2025-12-04 18:19:32.496 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5105/Event - 200 null text/html; charset=utf-8 1109.9036ms
+2025-12-04 18:19:45.491 -05:00 [INF] Application is shutting down...

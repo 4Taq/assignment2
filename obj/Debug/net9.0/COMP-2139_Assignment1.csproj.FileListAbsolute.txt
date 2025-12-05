@@ -1110,3 +1110,7 @@ D:\COMP-2139_Assignment2\obj\Debug\net9.0\refint\COMP-2139_Assignment1.dll
 D:\COMP-2139_Assignment2\obj\Debug\net9.0\COMP-2139_Assignment1.pdb
 D:\COMP-2139_Assignment2\obj\Debug\net9.0\COMP-2139_Assignment1.genruntimeconfig.cache
 D:\COMP-2139_Assignment2\obj\Debug\net9.0\ref\COMP-2139_Assignment1.dll
+D:\COMP-2139_Assignment2\bin\Debug\net9.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+D:\COMP-2139_Assignment2\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Json.dll
+D:\COMP-2139_Assignment2\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Physical.dll
+D:\COMP-2139_Assignment2\bin\Debug\net9.0\Microsoft.Extensions.FileSystemGlobbing.dll
